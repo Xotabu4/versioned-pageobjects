@@ -1,4 +1,4 @@
-import { versionedDecorator } from '../../../versioned';
+import { versionedDecorator } from '../../versioned';
 import { AbstractHomePage } from './abstract'
 import { AdminHomePage } from './admin';
 import { GuestHomePage } from './guest';
