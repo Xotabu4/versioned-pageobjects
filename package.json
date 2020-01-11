@@ -1,0 +1,20 @@
+{
+    "name": "wdio-reload-bug",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "test": "mocha --require ./node_modules/ts-node/register ./tests/test.ts"
+    },
+    "author": "Oleksandr Khotemskyi <xotabu4@gmail.com>",
+    "license": "MIT",
+    "types": "index.d.ts",
+    "devDependencies": {
+        "@types/chai": "^4.2.7",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^10.17.13",
+        "ts-node": "8.5.4",
+        "typescript": "3.7.4",
+        "chai": "^4.2.0",
+        "mocha": "^5.2.0"
+    }
+}
