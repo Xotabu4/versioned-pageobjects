@@ -1,24 +1,19 @@
-
-// export const versioner: new <T>(versions) => T = new Proxy(DefaultHomePage, handler);
-
-export function versioned<T>(Default, versions): new (...args) => T {
-    const handler = {
-        construct(target, args) {
-            console.log('constructor called', target.name);
-            // return new target(...args);
-            if (versions && global['version'] && versions[global['version']]) {
-                return new versions[global['version']](...args)
-            } else {
-                return new Default(...args)
-            }
-        }
-    };
-    return new Proxy(Default, handler);
+interface IVersionsOptions {
+    versions: any[]
+    defaultVersion: any
 }
 
-export function versionedDecorator(options: { versions: any[], defaultVersion: any }) {
-    // <T extends { new(...args: any[]): {} }>
+export function versioned<T>(options: IVersionsOptions): new (...args) => T {
+    return getVersionedProxy(class { }, options)
+}
 
+export function versionedDecorator(options: IVersionsOptions) {
+    return function (constructorFunction): any {
+        return getVersionedProxy(constructorFunction, options)
+    }
+}
+
+function getVersionedProxy(constructorFunction, options: IVersionsOptions) {
     const handler = {
         construct(target, args) {
             if (global['version'] === undefined) {
@@ -54,8 +49,5 @@ export function versionedDecorator(options: { versions: any[], defaultVersion: a
             }
         }
     }
-
-    return function (constructorFunction): any {
-        return new Proxy(constructorFunction, handler);
-    }
+    return new Proxy(constructorFunction, handler);
 }

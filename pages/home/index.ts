@@ -1,20 +1,20 @@
-import { versionedDecorator } from '../../versioned';
+import { versionedDecorator, versioned } from '../../versioned';
 import { AbstractHomePage } from './abstract'
 import { AdminHomePage } from './admin';
 import { GuestHomePage } from './guest';
 
-// export const HomePage = versioned<DefaultHomePage>(
-//     DefaultHomePage,
-//     {
-//         'GUEST': GuestHomePage, 'ADMIN': AdminHomePage
-//     }
-// )
+// For testing purposes, in production project will be just export const HomePage
 
-
+// Exporting decorated class
 @versionedDecorator({
     versions: [AdminHomePage, GuestHomePage],
     defaultVersion: GuestHomePage
 })
 class Exported { }
+export const DecoratedHomePage: new () => AbstractHomePage = Exported as any
 
-export const HomePage: new () => AbstractHomePage = Exported as any
+// Using special function that returns wrapped proxy 
+export const FunctionHomePage = versioned<AbstractHomePage>({
+    versions: [AdminHomePage, GuestHomePage],
+    defaultVersion: GuestHomePage
+})
