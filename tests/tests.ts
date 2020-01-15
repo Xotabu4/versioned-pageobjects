@@ -1,6 +1,5 @@
 import { expect } from "chai"
-import { FunctionHomePage } from '../pages/home/index';
-
+import { HomePage } from '../pages/home';
 
 describe('Version', function () {
     it('should be returned correctly', function () {
