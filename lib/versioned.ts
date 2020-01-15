@@ -1,19 +1,27 @@
-interface IVersionsOptions {
-    versions: any[]
-    defaultVersion: any
+interface IConstructor<T> {
+    new(...args: any): T;
 }
 
-export function versioned<T>(options: IVersionsOptions): new (...args) => T {
-    return getVersionedProxy(class { }, options)
+interface IVersionsOptions<T> {
+    versions: (IConstructor<T> & IVersioned)[]
+    defaultVersion: IConstructor<T> & IVersioned
 }
 
-export function versionedDecorator(options: IVersionsOptions) {
+interface IVersioned {
+    version: string
+}
+
+export function versioned<T>(options: IVersionsOptions<T>): new (...args) => T {
+    return getVersionedProxy<T>(class { }, options)
+}
+
+export function versionedDecorator<T>(options: IVersionsOptions<T>) {
     return function (constructorFunction): any {
         return getVersionedProxy(constructorFunction, options)
     }
 }
 
-function getVersionedProxy(constructorFunction, options: IVersionsOptions) {
+function getVersionedProxy<T>(constructorFunction, options: IVersionsOptions<T>) {
     const handler = {
         construct(target, args) {
             if (global['version'] === undefined) {

@@ -1,6 +1,7 @@
 import { expect } from "chai"
+import { AbstractHomePage } from '../pages/home/abstract';
 
-export function testsBody(HomePage) {
+export function testsBody(HomePage: new () => AbstractHomePage) {
     describe('Version', function () {
         it('should be returned correctly', function () {
             global['version'] = 'GUEST'
