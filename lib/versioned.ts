@@ -15,12 +15,6 @@ export function versioned<T>(options: IVersionsOptions<T>): new (...args) => T {
     return getVersionedProxy<T>(class { }, options)
 }
 
-export function versionedDecorator<T>(options: IVersionsOptions<T>) {
-    return function (constructorFunction): any {
-        return getVersionedProxy(constructorFunction, options)
-    }
-}
-
 function getVersionedProxy<T>(constructorFunction, options: IVersionsOptions<T>) {
     const handler = {
         construct(target, args) {
