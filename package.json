@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "mocha --require ./node_modules/ts-node/register ./tests/**/*.ts"
+        "test": "mocha --require ./node_modules/ts-node/register ./tests/**/*.ts",
+        "test-di": "mocha --require ./node_modules/ts-node/register ./di/tests/**/*.ts"
     },
     "author": "Oleksandr Khotemskyi <xotabu4@gmail.com>",
     "license": "MIT",
@@ -16,6 +17,7 @@
         "typescript": "3.7.4",
         "chai": "^4.2.0",
         "mocha": "^5.2.0",
-        "tsyringe": "4.0.1"
+        "tsyringe": "4.0.1",
+        "reflect-metadata": "^0.1.13"
     }
 }
