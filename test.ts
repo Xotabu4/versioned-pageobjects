@@ -1,38 +1,30 @@
+export abstract class Page {
+    static get versions() {
+        return {
+            DESKTOP: {
+                DEFAULT: MobilePage
+            },
+            MOBILE: {
+                DEFAULT: DesktopPage
+            }
+        }
+    }
 
-// class Page {
-//     static version = {
-//         screen: 'MOBILE',
-//         user: 'GUEST'
-//     }
+    title() {
+        return 'Page title!'
+    }
 
-//     title(): string {
-//         return 'some title'
-//     }
-// }
+    abstract doSearch()
+}
 
-// interface IConstructor<T> {
-//     new(...args: any): T;
-// }
+class DesktopPage extends Page {
+    doSearch() {
+        console.log('Doing DESKTOP search')
+    }
+}
 
-// function create2<T extends>(PAGE: IConstructor<T>): void {
-//     const a = new PAGE();
-//     console.log(a.title())
-// }
-
-// const c = create2<Page>(Page)
-
-// interface IVersioned {
-//     version: {
-//         screen: string,
-//         user: string
-//     }
-// }
-
-// function create<T extends Object>(PAGE: IConstructor<T> & IVersioned): void {
-//     console.log(PAGE.version.screen)
-//     const a = new PAGE();
-//     console.log(a.title())
-// }
-
-// const b = create<Page>(Page)
-
+class MobilePage extends Page {
+    doSearch() {
+        console.log('Doing MOBILE search')
+    }
+}

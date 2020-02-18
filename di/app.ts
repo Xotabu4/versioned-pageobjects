@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { container, autoInjectable, injectable, inject, predicateAwareClassFactory, registry } from 'tsyringe';
+import { container, autoInjectable, injectable, inject, predicateAwareClassFactory, registry, injectAll } from 'tsyringe';
 import { HomePage } from './pages/home/index';
 import { GuestHomePage } from './pages/home/guest';
 import { AdminHomePage } from './pages/home/admin';
@@ -7,24 +7,27 @@ import { AdminHomePage } from './pages/home/admin';
 @injectable()
 @registry([
     {
-        token: "home_pages",
+        token: 'versions',
         useClass: GuestHomePage
     },
     {
-        token: "home_pages",
+        token: 'versions',
         useClass: AdminHomePage
     },
-    {
-        token: "home",
-        useFactory: (c) => {
-            const versions = c.resolveAll<HomePage>('home_pages')
-            return versions.filter(inst => inst.version == global['version'])[0]
-        }
-    }
+    // {
+    //     token: 'versions',
+    //     useFactory: container => {
+    //         const versions = container.resolveAll<HomePage>('home_pages')
+    //         return versions.filter(inst => inst.version == global['version'])[0]
+    //     }
+    // }
 ])
 export class Application {
+
     constructor(
-        @inject('home')public home: HomePage,
+        @inject('home') public home: HomePage,
+        
+        @injectAll('home_versions') private home_versions: HomePage[]
         // public payment?: DesktopAdminPaymentPage,
     ) { }
 }

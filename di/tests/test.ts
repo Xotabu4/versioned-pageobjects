@@ -1,11 +1,10 @@
 import { expect } from "chai"
-import { initApp, APP } from '../app';
+import { initApp } from '../app';
 
 describe('Version', function () {
-    let APP;
     it('should be returned correctly', function () {
         global['version'] = 'ADMIN'
-        APP = initApp()
+        let APP = initApp()
         expect(APP.home.title()).to.equal('Admin title!')
 
         global['version'] = 'GUEST'
