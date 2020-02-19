@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { container, autoInjectable, injectable, inject, predicateAwareClassFactory, registry, injectAll } from 'tsyringe';
+import { container, injectable, inject, registry, injectAll } from 'tsyringe';
 import { HomePage } from './pages/home/index';
 import { GuestHomePage } from './pages/home/guest';
 import { AdminHomePage } from './pages/home/admin';
@@ -14,13 +14,13 @@ import { AdminHomePage } from './pages/home/admin';
         token: 'versions',
         useClass: AdminHomePage
     },
-    // {
-    //     token: 'versions',
-    //     useFactory: container => {
-    //         const versions = container.resolveAll<HomePage>('home_pages')
-    //         return versions.filter(inst => inst.version == global['version'])[0]
-    //     }
-    // }
+    {
+        token: 'versions',
+        useFactory: container => {
+            const versions = container.resolveAll<HomePage>('home_pages')
+            return versions.filter(inst => inst.version == global['version'])[0]
+        }
+    }
 ])
 export class Application {
 

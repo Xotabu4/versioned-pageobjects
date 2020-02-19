@@ -1,0 +1,11 @@
+{
+"web:test-sixtmydriver": "protractor --application=MYDRIVER",
+"web:test-sixtmydriver-mobile": "protractor --application=MYDRIVER --screenType=MOBILE",
+"web:test-sixtride": "protractor",
+"web:test-sixtride-mobile": "protractor --screenType=MOBILE",
+"web:test-sixtlimousine": "protractor --application=LIMOUSINE",
+"web:test-sixtlimousine-mobile": "protractor --application=LIMOUSINE --screenType=MOBILE",
+"web:test-sixtetihad": "protractor --application=ETIHAD",
+"web:test-sixtetihad-mobile": "protractor --application=ETIHAD --screenType=MOBILE"
+}
+
